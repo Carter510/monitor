@@ -1,0 +1,200 @@
+/* Global styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e2f;
+    color: #dcdcdc;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0.5em 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #ffffff;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.container-align {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 20px;
+}
+
+.banner {
+    background-color: #333344;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #5c5cd6;
+}
+
+.section {
+    background-color: #2c2c3c;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s;
+}
+
+.section:hover {
+    transform: translateY(-5px);
+}
+
+.section h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #5c5cd6;
+}
+
+.section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #3b3b4b;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.section ul li:hover {
+    background-color: #4a4a5c;
+}
+
+.section ul li a {
+    color: #dcdcdc;
+    text-decoration: none;
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.section ul li a:hover {
+    background-color: #5c5cd6;
+    color: #ffffff;
+}
+
+.status {
+    padding: 0.2em 0.5em;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 0.9em;
+}
+
+.status.up {
+    background-color: #28a745;
+}
+
+.status.down {
+    background-color: #dc3545;
+}
+
+.status.maintenance {
+    background-color: #ffc107;
+    color: #000;
+}
+
+/* Button styles */
+.btn {
+    background-color: #5c5cd6;
+    color: #ffffff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #3c3c6d;
+}
+
+/* Remove button */
+.remove-form {
+    display: flex;
+    align-items: center; /* Align the icon with text */
+}
+
+.remove-btn {
+    background: none; /* Remove the background */
+    border: none; /* Remove the border */
+    cursor: pointer; /* Change cursor to pointer */
+    color: #dc3545; /* Set the icon color to red */
+    font-size: 1.2em; /* Adjust icon size */
+    padding: 0; /* Remove padding */
+    margin-left: 10px; /* Add some margin for spacing */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+.remove-btn i {
+    display: flex;
+    align-items: center; /* Center icon vertically */
+    line-height: 1; /* Ensure line-height does not affect vertical alignment */
+}
+
+.remove-btn:hover {
+    color: #a71d2a; /* Darken the color on hover */
+}
+
+/* Forms and input styles */
+form {
+    margin-top: 15px;
+}
+
+.form-group {
+    width: 100%; /* Ensure the width of form groups is consistent */
+    margin-bottom: 15px;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%; /* Ensure full width */
+    padding: 10px;
+    border: 1px solid #5c5cd6;
+    border-radius: 5px;
+    background-color: #1e1e2f;
+    color: #dcdcdc;
+    box-sizing: border-box;
+}
+
+input[type="text"]::placeholder, input[type="number"]::placeholder {
+    color: #8888aa;
+}
+
+.service-menu-container, .add-server-container {
+    background-color: #2c2c3c;
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+}
+
+.service-menu-container h2, .add-server-container h2 {
+    color: #5c5cd6;
+}
+
+.service-menu-form button.add-btn, .server-form button.add-btn {
+    background-color: #28a745;
+}
+
+.service-menu-form button.add-btn:hover, .server-form button.add-btn:hover {
+    background-color: #218838;
+}

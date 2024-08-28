@@ -15,14 +15,16 @@
     <div class="container">
         {% for server, details in servers.items() %}
         <div class="section {{ details['status'].lower() }}">
-            <h2>
-                {{ server }} - <span class="status {{ details['status'].lower() }}">{{ details['status'] }}</span>
+            <div class="server-title-container">
+                <h2>
+                    {{ server }} - <span class="status {{ details['status'].lower() }}">{{ details['status'] }}</span>
+                </h2>
                 <form action="{{ url_for('remove_server', server_name=server) }}" method="post" class="remove-form">
-                    <button type="submit" class="remove-btn">
+                    <button type="submit" class="remove-btn-server">
                         <i class="fas fa-trash"></i> <!-- Trash icon instead of "Remove" text -->
                     </button>
                 </form>
-            </h2>
+            </div>
             <ul>
                 {% for service, service_details in details['services'].items() %}
                 <li>

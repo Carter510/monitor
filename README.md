@@ -1,6 +1,6 @@
 # Monitor
 
-Monitor is a simple tool designed to check if your servers and services are UP or DOWN by monitoring specific ports. This project helps you keep track of the availability of your infrastructure, providing you with peace of mind and immediate notifications if something goes wrong.
+Monitor is a simple tool designed to check if your servers and services are UP or DOWN by monitoring specific ports. This project helps you keep track of the availability of your infrastructure, and let you see if something is wrong
 
 ## Features
 

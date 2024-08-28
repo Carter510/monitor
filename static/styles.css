@@ -143,6 +143,8 @@ h1 {
     padding: 0; /* Remove padding */
     margin-left: 10px; /* Add some margin for spacing */
     transition: color 0.3s; /* Smooth color transition */
+    position: relative; /* Set position to relative */
+    top: -6.2px ; /*Move the icon slightly upwards */
 }
 
 .remove-btn i {
@@ -197,4 +199,38 @@ input[type="text"]::placeholder, input[type="number"]::placeholder {
 
 .service-menu-form button.add-btn:hover, .server-form button.add-btn:hover {
     background-color: #218838;
+}
+
+.server-title-container {
+    display: flex;
+    justify-content: space-between; /* Ensure space between the title and the button */
+    align-items: center; /* Vertically align the items */
+}
+
+.server-title-container h2 {
+    margin: 0; /* Remove margin to align properly */
+    flex-grow: 1; /* Allow the title to take up available space */
+}
+
+.remove-btn-server {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #dc3545;
+    font-size: 1.2em;
+    padding: 0;
+    margin-left: 10px;
+    transition: color 0.3s;
+    position: relative; /* Set position to relative */
+    top: -6.2px ; /*Move the icon slightly upwards */
+}
+
+.remove-btn-server i {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.remove-btn-server:hover {
+    color: #a71d2a;
 }

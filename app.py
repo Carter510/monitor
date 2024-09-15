@@ -43,7 +43,10 @@ def index():
         # Check each service status
         for service_name, service_details in details["services"].items():
             service_ip = service_details["ip"]
-            service_status = ping_port(service_ip, service_details["port"])
+            if "port" in service_details:
+                service_status = ping_port(service_ip, service_details["port"])
+            else:
+                service_status = ping_icmp(service_ip)
             servers[server]["services"][service_name]["status"] = service_status
 
     return render_template('index.html', servers=servers)
@@ -75,17 +78,24 @@ def add_service():
     server_name = request.form['server_name']
     service_name = request.form['service_name']
     service_ip = request.form['service_ip']
-    service_port = request.form['service_port']
-    service_url = request.form['service_url']
+    service_port = request.form.get('service_port', None)
+    service_url = request.form.get('service_url', None)
 
     if server_name in servers:
-        servers[server_name]['services'][service_name] = {
-            "port": int(service_port),
-            "url": service_url,
+        service_data = {
             "ip": service_ip,
             "status": "UNKNOWN"
         }
+
+        if service_port:
+            service_data["port"] = int(service_port)
+
+        if service_url:
+            service_data["url"] = service_url
+
+        servers[server_name]['services'][service_name] = service_data
         save_servers(servers)
+
     return redirect(url_for('index'))
 
 @app.route('/remove_service/<server_name>/<service_name>', methods=['POST'])

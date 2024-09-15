@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,43 +7,65 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <script>
-        // Rafraîchit la page toutes les 30 secondes (30000 ms)
-        setInterval(function(){
-            window.location.reload();
-        }, 30000);
+        // Function to refresh the container div
+        function refreshContainer() {
+            fetch(window.location.href) // Get the current page content
+                .then(response => response.text())
+                .then(html => {
+                    // Create a temporary DOM element to extract the new container content
+                    let tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+
+                    // Extract the new container div
+                    let newContainer = tempDiv.querySelector('.container');
+
+                    // Replace the current container with the new content
+                    document.querySelector('.container').innerHTML = newContainer.innerHTML;
+                });
+        }
+
+        // Set interval to refresh the container div every 30 seconds
+        setInterval(refreshContainer, 30000);
     </script>
 </head>
 <body>
     <div class="banner">
         <h1>Lobby Monitoring</h1>
     </div>
+
     <div class="container">
         {% for server, details in servers.items() %}
-        <div class="section {{ details['status'].lower() }}">
-            <div class="server-title-container">
-                <h2>
-                    {{ server }} - <span class="status {{ details['status'].lower() }}">{{ details['status'] }}</span>
-                </h2>
-                <form action="{{ url_for('remove_server', server_name=server) }}" method="post" class="remove-form">
-                    <button type="submit" class="remove-btn-server">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </form>
-            </div>
-            <ul>
-                {% for service, service_details in details['services'].items() %}
-                <li>
-                    <a href="{{ service_details['url'] }}" target="_blank">{{ service }}</a>
-                    <span class="status {{ service_details['status'].lower() }}">{{ service_details['status'] }}</span>
-                    <form action="{{ url_for('remove_service', server_name=server, service_name=service) }}" method="post" class="remove-form">
-                        <button type="submit" class="remove-btn">
+        <div id="server-{{ server }}" class="server-section" data-server="{{ server }}">
+            <div class="section {{ details['status'].lower() }}">
+                <div class="server-title-container">
+                    <h2>
+                        {{ server }} - <span class="status {{ details['status'].lower() }}">{{ details['status'] }}</span>
+                    </h2>
+                    <form action="{{ url_for('remove_server', server_name=server) }}" method="post" class="remove-form">
+                        <button type="submit" class="remove-btn-server">
                             <i class="fas fa-trash"></i>
                         </button>
                     </form>
-                </li>
-                {% endfor %}
-            </ul>
+                </div>
+                <ul>
+                    {% for service, service_details in details['services'].items() %}
+                    <li>
+                        <a href="{{ service_details.get('url', '#') }}" target="_blank">{{ service }}</a>
+                        <span class="status {{ service_details['status'].lower() }}">{{ service_details['status'] }}</span>
+                        {% if service_details.get('port') %}
+                            <span>Port: {{ service_details['port'] }}</span>
+                        {% endif %}
+                        <form action="{{ url_for('remove_service', server_name=server, service_name=service) }}" method="post" class="remove-form">
+                            <button type="submit" class="remove-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -68,10 +89,10 @@
                     <input type="text" name="service_ip" placeholder="Service IP" required>
                 </div>
                 <div class="form-group">
-                    <input type="number" name="service_port" placeholder="Service Port" required>
+                    <input type="number" name="service_port" placeholder="Service Port">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="service_url" placeholder="Service URL" required>
+                    <input type="text" name="service_url" placeholder="Service URL">
                 </div>
                 <button type="submit" class="btn add-btn">Add Service</button>
             </form>
